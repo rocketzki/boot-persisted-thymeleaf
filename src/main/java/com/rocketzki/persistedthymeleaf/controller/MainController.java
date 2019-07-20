@@ -1,13 +1,14 @@
 package com.rocketzki.persistedthymeleaf.controller;
 
-import com.rocketzki.persistedthymeleaf.model.Score;
 import com.rocketzki.persistedthymeleaf.model.User;
-import com.rocketzki.persistedthymeleaf.service.ScoreService;
 import com.rocketzki.persistedthymeleaf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -17,12 +18,10 @@ import java.util.Optional;
 @RequestMapping("/")
 public class MainController {
 
-    private ScoreService scoreService;
     private UserService userService;
 
     @Autowired
-    public MainController(ScoreService scoreService, UserService userService) {
-        this.scoreService = scoreService;
+    public MainController(UserService userService) {
         this.userService = userService;
     }
 
@@ -33,19 +32,11 @@ public class MainController {
 
     @GetMapping("/login")
     public ModelAndView showLoginPage(@RequestParam(required = false) String error,
-                                      ModelAndView mav,
-                                      BindingResult bindingResult) {
+                                      ModelAndView mav) {
         mav.setViewName("login");
         if ("true".equals(error)) {
             mav.addObject("error", "Login error - bad username or password.");
         }
-        return mav;
-    }
-
-    @GetMapping("/hall")
-    public ModelAndView showHallOfFame(ModelAndView mav) {
-        mav.addObject("scores", scoreService.getAllScores());
-        mav.setViewName("hall");
         return mav;
     }
 
@@ -73,10 +64,5 @@ public class MainController {
         return modelAndView;
     }
 
-    @GetMapping("/sendScore")
-    @ResponseBody
-    public Score sendScore(@RequestParam Integer score) {
-        return scoreService.saveScore(score);
-    }
 
 }

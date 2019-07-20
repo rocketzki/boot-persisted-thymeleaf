@@ -1,0 +1,40 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rocketzki's Snake!</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+
+</head>
+<body style="background-color: #e0ccff">
+<div class="container" th:replace="fragments/header :: header"></div>
+<br><br>
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Score</th>
+        <th scope="col">Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr th:each="score : ${scores}">
+        <td th:text="${score.id != null}? ${score.id} : 'None'"></td>
+        <td th:text="${score.username != null}? ${score.username} : 'None'"></td>
+        <td th:text="${score.points != null}? ${score.points} : 'None'"></td>
+        <td th:text="${score.date != null}?
+                        ${#temporals.format(score.date, 'dd-MM-yyyy HH:mm')}: 'None'"></td>
+    </tr>
+
+
+    </tbody>
+</table>
+</body>
+</html>

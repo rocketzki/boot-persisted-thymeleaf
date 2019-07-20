@@ -1,0 +1,48 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rocketzki's Snake!</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+
+</head>
+<body style="background-color: #e0ccff">
+<div class="container" th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="row"><br></div>
+    <div class="row" style="vertical-align:middle; padding:300px;">
+        <div class="col"></div>
+        <div class="col-sm-10">
+            <div class="shadow p-3 mb-5 rounded" style="background-color: #eadfff">
+                <h3 class="text-center">Enter your credentials:<br><br></h3>
+                <form action="/login" method="post">
+                    Username:<br>
+                    <input class="form-control" name="username" required type="text"><br>
+                    Password:<br>
+                    <input class="form-control" name="password" required type="password"><br>
+                    <input class="btn btn-success" style="horiz-align: center; vertical-align: center" type="submit"
+                           value="Enter the game">
+                    <h2><span class="text-danger" th:utext="${error}"></span></h2>
+
+
+                </form>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<script crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+

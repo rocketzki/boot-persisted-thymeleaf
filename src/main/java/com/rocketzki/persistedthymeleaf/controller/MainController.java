@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -48,20 +47,23 @@ public class MainController {
 
 
     @PostMapping(value = "/register")
-    public ModelAndView registerUser(ModelAndView modelAndView,
+    public ModelAndView registerUser(ModelAndView mav,
                                      @Valid User user,
                                      BindingResult bindingResult) {
-        Optional.ofNullable(userService.findByUsername(user.getUsername())).ifPresent(
-                u -> bindingResult.rejectValue("username", "error.user", "The username is in use!"));
+        mav.setViewName("register");
+
+        if (userService.findByUsername(user.getUsername()) != null) {
+            mav.addObject("error", "That username is in use!");
+            return mav;
+        }
 
         if (bindingResult.hasErrors()) {
-            modelAndView.addObject("error", "Fill in all fields!");
-            modelAndView.setViewName("register");
+            mav.addObject("error", "Fill in all fields!");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("success", "User has been registered!");
+            mav.addObject("success", "User has been registered!");
         }
-        return modelAndView;
+        return mav;
     }
 
 
